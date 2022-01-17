@@ -3,7 +3,7 @@ class Calculator {
     this.previousOperandTextElement = previousOperandTextElement
     this.currentOperandTextElement = currentOperandTextElement
     this.clear()
-  }
+}
 
   clear() {
     this.currentOperand = ''
@@ -124,3 +124,27 @@ deleteButton.addEventListener('click', button => {
   calculator.delete()
   calculator.updateDisplay()
 })
+
+document.addEventListener('keydown', function (event) {
+  let patternForNumbers = /[0-9]/g;
+  let patternForOperators = /[+\-*\/]/g
+  if (event.key.match(patternForNumbers)) {
+    event.preventDefault();
+    calculator.appendNumber(event.key)
+    calculator.updateDisplay()
+  }
+
+  if (event.key === 'Enter' || event.key === '=') {
+    event.preventDefault();
+    calculator.compute()
+    calculator.updateDisplay()
+  }
+  if (event.key === "Backspace") {
+    event.preventDefault();
+    calculator.delete()
+    calculator.updateDisplay()
+  }
+
+
+});
+
